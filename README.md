@@ -17,7 +17,6 @@ A modern, full-stack trip planning application built with React and FastAPI. Cre
 - **Modern UI/UX**: Built with Tailwind CSS and Radix UI components
 - **RESTful API**: FastAPI backend with automatic API documentation
 - **Real-time Updates**: Live synchronization between frontend and backend
-- **Export Functionality**: Generate PDF reports of your itinerary
 
 ## 🛠️ Tech Stack
 
@@ -84,48 +83,7 @@ A modern, full-stack trip planning application built with React and FastAPI. Cre
    REACT_APP_BACKEND_URL=http://localhost:8000
    WDS_SOCKET_PORT=0
    ```
-
-### Running the Application
-
-**Option 1: Use the startup script**
-```powershell
-.\start-tripflow.ps1
-```
-
-**Option 2: Manual startup**
-```bash
-# Terminal 1 - Backend
-cd backend
-uvicorn server:app --reload --host 0.0.0.0 --port 8000
-
-# Terminal 2 - Frontend
-cd frontend
-npm start
-```
-
-### Access URLs
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000/api/
-- **API Documentation**: http://localhost:8000/docs
-
-## 📱 Usage
-
-### Creating Your First Trip
-1. Click **"New Trip"** on the homepage
-2. Enter trip details (title, dates, currency)
-3. Click **"Create Trip"**
-
-### Managing Activities
-1. Click **"Add Activity"** on any day column
-2. Fill in activity details (title, time, location, cost, category)
-3. **Drag and drop** activities between days or reorder within a day
-4. Edit or delete activities using the action buttons
-
-### Tracking Expenses
-- View **real-time cost calculations** per day
-- See **total trip cost** in your selected currency
-- Access **detailed statistics** in the Stats tab
-
+   
 ## 🏗️ Project Structure
 
 ```
@@ -145,14 +103,6 @@ tripflow/
 ├── start-tripflow.ps1    # Startup script
 └── README.md            # Project documentation
 ```
-
-## 🎨 Key Improvements Made
-
-- ✅ **Dynamic Currency Display**: Proper symbols (₹, €, £, ¥) based on trip currency
-- ✅ **Clean Branding**: Removed third-party watermarks
-- ✅ **Enhanced UX**: Improved user interface and interactions
-- ✅ **Modern Architecture**: Scalable full-stack design
-- ✅ **Comprehensive Testing**: Automated testing capabilities
 
 ## 📊 API Endpoints
 
@@ -181,24 +131,15 @@ tripflow/
 - [ ] Mobile app development
 - [ ] Advanced analytics and insights
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 Author
 
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- Portfolio: [yourwebsite.com](https://yourwebsite.com)
+**Mohd Shadab**
+- GitHub: https://github.com/shadab80k
+- LinkedIn: https://www.linkedin.com/in/shadab80k/
 
 ## 🙏 Acknowledgments
 
