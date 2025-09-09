@@ -89,3 +89,11 @@ frontend/node_modules/.cache/default-development/6.pack
 frontend/node_modules/.cache/default-development/7.pack
 frontend/node_modules/.cache/default-development/8.pack_
 frontend/node_modules/.cache/default-development/8.pack
+
+# Local docs not needed on repo
+LINKEDIN_SHOWCASE.md
+GITHUB_UPLOAD_GUIDE.md
+test-project.ps1
+start-tripflow.ps1
+test_result.md
+
