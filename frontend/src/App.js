@@ -237,17 +237,22 @@ function DayColumn({ day, activities, onAddActivity, onEditActivity, onDeleteAct
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 min-w-96 h-fit">
+    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 md:p-6 min-w-80 md:min-w-96 w-full md:w-auto h-fit">
       {/* Day Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="font-bold text-xl text-gray-900 mb-1">Day {day.index}</h3>
-          <p className="text-sm text-gray-600 font-medium">{formatDate(day.date)}</p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 md:mb-6 gap-3 sm:gap-0">
+        <div className="flex-1">
+          <h3 className="font-bold text-lg md:text-xl text-gray-900 mb-1">Day {day.index}</h3>
+          <p className="text-xs md:text-sm text-gray-600 font-medium">{formatDate(day.date)}</p>
         </div>
-        <div className="text-right">
-          <div className="text-2xl font-bold text-gray-900">{activityCount}</div>
-          <div className="text-xs text-gray-500 uppercase tracking-wide">Activities</div>
-          <div className="text-lg font-bold text-green-600 mt-1">{currencySymbol}{totalCost.toFixed(2)}</div>
+        <div className="flex sm:flex-col sm:text-right gap-4 sm:gap-0">
+          <div className="text-center sm:text-right">
+            <div className="text-xl md:text-2xl font-bold text-gray-900">{activityCount}</div>
+            <div className="text-xs text-gray-500 uppercase tracking-wide">Activities</div>
+          </div>
+          <div className="text-center sm:text-right">
+            <div className="text-base md:text-lg font-bold text-green-600">{currencySymbol}{totalCost.toFixed(2)}</div>
+            <div className="text-xs text-gray-500 uppercase tracking-wide sm:hidden">Total</div>
+          </div>
         </div>
       </div>
 
@@ -361,7 +366,7 @@ function ActivityDialog({ open, onOpenChange, activity, dayId, onSave }) {
               />
             </div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="start_time" className="text-base font-semibold">Start Time</Label>
                 <Input
@@ -395,7 +400,7 @@ function ActivityDialog({ open, onOpenChange, activity, dayId, onSave }) {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="category" className="text-base font-semibold">Category</Label>
                 <Select value={formData.category} onValueChange={(value) => setFormData({...formData, category: value})}>
@@ -439,11 +444,11 @@ function ActivityDialog({ open, onOpenChange, activity, dayId, onSave }) {
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-6 border-t">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="px-6">
+          <div className="flex flex-col sm:flex-row sm:justify-end gap-3 pt-6 border-t">
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} className="px-6 order-2 sm:order-1">
               Cancel
             </Button>
-            <Button type="submit" className="px-6">
+            <Button type="submit" className="px-6 order-1 sm:order-2">
               {activity ? 'Update Activity' : 'Add Activity'}
             </Button>
           </div>
@@ -490,7 +495,7 @@ function TripMap({ activities, center = [35.6762, 139.6503] }) {
   const polylinePositions = markers.map(marker => marker.position);
 
   return (
-    <div className="h-96 w-full rounded-xl overflow-hidden border-2 border-gray-200">
+    <div className="h-64 md:h-96 w-full rounded-xl overflow-hidden border-2 border-gray-200">
       <MapContainer 
         center={center} 
         zoom={12} 
@@ -848,41 +853,43 @@ function TripPlanner() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       {/* Enhanced Header */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-40">
-        <div className="px-6 py-4">
+        <div className="px-4 md:px-6 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 md:gap-4 min-w-0 flex-1">
               <Button
                 variant="ghost"
                 size="sm"
-                className="lg:hidden"
+                className="lg:hidden flex-shrink-0"
                 onClick={() => setSidebarOpen(true)}
               >
                 <Menu className="h-5 w-5" />
               </Button>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent truncate">
                   {tripData.title}
                 </h1>
-                <p className="text-gray-600 font-medium">
+                <p className="text-sm md:text-base text-gray-600 font-medium truncate">
                   {format(parseISO(tripData.date_start), 'MMM d')} - {format(parseISO(tripData.date_end), 'MMM d, yyyy')} • {tripDuration} days
                 </p>
               </div>
             </div>
             
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-6 text-sm">
-                <div className="text-center px-4 py-2 bg-blue-50 rounded-lg">
-                  <div className="font-bold text-2xl text-blue-600">{totalActivities}</div>
-                  <div className="text-blue-700 font-medium">Activities</div>
+            <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
+              <div className="hidden lg:flex items-center gap-4 xl:gap-6 text-sm">
+                <div className="text-center px-3 xl:px-4 py-2 bg-blue-50 rounded-lg">
+                  <div className="font-bold text-xl xl:text-2xl text-blue-600">{totalActivities}</div>
+                  <div className="text-blue-700 font-medium text-xs xl:text-sm">Activities</div>
                 </div>
-                <div className="text-center px-4 py-2 bg-green-50 rounded-lg">
-                  <div className="font-bold text-2xl text-green-600">{getCurrencySymbol(tripData?.currency)}{totalCost.toFixed(2)}</div>
-                  <div className="text-green-700 font-medium">Total Cost</div>
+                <div className="text-center px-3 xl:px-4 py-2 bg-green-50 rounded-lg">
+                  <div className="font-bold text-xl xl:text-2xl text-green-600">{getCurrencySymbol(tripData?.currency)}{totalCost.toFixed(2)}</div>
+                  <div className="text-green-700 font-medium text-xs xl:text-sm">Total Cost</div>
                 </div>
               </div>
               
               <Button
                 variant="outline"
+                size="sm"
+                className="flex-shrink-0"
                 onClick={async () => {
                   try {
                     await navigator.clipboard.writeText(window.location.href);
@@ -905,8 +912,8 @@ function TripPlanner() {
                   }
                 }}
               >
-                <Share2 className="h-4 w-4 mr-2" />
-                Share
+                <Share2 className="h-4 w-4 md:mr-2" />
+                <span className="hidden md:inline">Share</span>
               </Button>
             </div>
           </div>
@@ -989,24 +996,27 @@ function TripPlanner() {
         {/* Main Content Area */}
         <div className="flex-1">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <div className="px-6 py-4 bg-white/50 border-b">
-              <TabsList className="grid w-full max-w-md grid-cols-3">
-                <TabsTrigger value="planner" className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  Planner
+            <div className="px-4 md:px-6 py-4 bg-white/50 border-b">
+              <TabsList className="grid w-full max-w-md grid-cols-3 tabs-list">
+                <TabsTrigger value="planner" className="flex items-center gap-1 md:gap-2 text-sm">
+                  <Calendar className="h-3 w-3 md:h-4 md:w-4" />
+                  <span className="hidden xs:inline">Planner</span>
+                  <span className="xs:hidden">Plan</span>
                 </TabsTrigger>
-                <TabsTrigger value="map" className="flex items-center gap-2">
-                  <Map className="h-4 w-4" />
-                  Map
+                <TabsTrigger value="map" className="flex items-center gap-1 md:gap-2 text-sm">
+                  <Map className="h-3 w-3 md:h-4 md:w-4" />
+                  <span className="hidden xs:inline">Map</span>
+                  <span className="xs:hidden">Map</span>
                 </TabsTrigger>
-                <TabsTrigger value="stats" className="flex items-center gap-2">
-                  <BarChart3 className="h-4 w-4" />
-                  Stats
+                <TabsTrigger value="stats" className="flex items-center gap-1 md:gap-2 text-sm">
+                  <BarChart3 className="h-3 w-3 md:h-4 md:w-4" />
+                  <span className="hidden xs:inline">Stats</span>
+                  <span className="xs:hidden">Stats</span>
                 </TabsTrigger>
               </TabsList>
             </div>
 
-            <TabsContent value="planner" className="p-6">
+            <TabsContent value="planner" className="p-4 md:p-6">
               <DndContext
                 sensors={sensors}
                 collisionDetection={closestCorners}
@@ -1014,7 +1024,7 @@ function TripPlanner() {
                 onDragOver={handleDragOver}
                 onDragEnd={handleDragEnd}
               >
-                <div className="flex gap-8 overflow-x-auto pb-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 lg:gap-8 md:flex md:gap-8 md:overflow-x-auto pb-8">
                   {days.map((day) => (
                     <DayColumn
                       key={day.id}
@@ -1041,53 +1051,55 @@ function TripPlanner() {
               </DndContext>
             </TabsContent>
 
-            <TabsContent value="map" className="p-6">
+            <TabsContent value="map" className="p-4 md:p-6">
               <div className="max-w-5xl mx-auto">
-                <div className="mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Trip Route</h2>
-                  <p className="text-gray-600">Visualize your trip activities on the map</p>
+                <div className="mb-4 md:mb-6">
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Trip Route</h2>
+                  <p className="text-sm md:text-base text-gray-600">Visualize your trip activities on the map</p>
                 </div>
-                <TripMap activities={activities} />
+                <div className="trip-map">
+                  <TripMap activities={activities} />
+                </div>
               </div>
             </TabsContent>
 
-            <TabsContent value="stats" className="p-6">
-              <div className="max-w-4xl mx-auto space-y-8">
+            <TabsContent value="stats" className="p-4 md:p-6">
+              <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Trip Statistics</h2>
-                  <p className="text-gray-600">Analyze your trip data and spending</p>
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">Trip Statistics</h2>
+                  <p className="text-sm md:text-base text-gray-600">Analyze your trip data and spending</p>
                 </div>
                 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                   <Card>
-                    <CardContent className="p-6 text-center">
-                      <Calendar className="h-8 w-8 text-blue-500 mx-auto mb-3" />
-                      <div className="text-3xl font-bold text-gray-900">{tripDuration}</div>
-                      <div className="text-gray-600">Days</div>
+                    <CardContent className="p-4 md:p-6 text-center">
+                      <Calendar className="h-6 w-6 md:h-8 md:w-8 text-blue-500 mx-auto mb-2 md:mb-3" />
+                      <div className="text-2xl md:text-3xl font-bold text-gray-900">{tripDuration}</div>
+                      <div className="text-sm md:text-base text-gray-600">Days</div>
                     </CardContent>
                   </Card>
                   
                   <Card>
-                    <CardContent className="p-6 text-center">
-                      <Sparkles className="h-8 w-8 text-purple-500 mx-auto mb-3" />
-                      <div className="text-3xl font-bold text-gray-900">{totalActivities}</div>
-                      <div className="text-gray-600">Activities</div>
+                    <CardContent className="p-4 md:p-6 text-center">
+                      <Sparkles className="h-6 w-6 md:h-8 md:w-8 text-purple-500 mx-auto mb-2 md:mb-3" />
+                      <div className="text-2xl md:text-3xl font-bold text-gray-900">{totalActivities}</div>
+                      <div className="text-sm md:text-base text-gray-600">Activities</div>
                     </CardContent>
                   </Card>
                   
                   <Card>
-                    <CardContent className="p-6 text-center">
-                      <DollarSign className="h-8 w-8 text-green-500 mx-auto mb-3" />
-                      <div className="text-3xl font-bold text-gray-900">{getCurrencySymbol(tripData?.currency)}{totalCost.toFixed(2)}</div>
-                      <div className="text-gray-600">Total Cost</div>
+                    <CardContent className="p-4 md:p-6 text-center">
+                      <DollarSign className="h-6 w-6 md:h-8 md:w-8 text-green-500 mx-auto mb-2 md:mb-3" />
+                      <div className="text-xl md:text-3xl font-bold text-gray-900">{getCurrencySymbol(tripData?.currency)}{totalCost.toFixed(2)}</div>
+                      <div className="text-sm md:text-base text-gray-600">Total Cost</div>
                     </CardContent>
                   </Card>
                   
                   <Card>
-                    <CardContent className="p-6 text-center">
-                      <TrendingUp className="h-8 w-8 text-orange-500 mx-auto mb-3" />
-                      <div className="text-3xl font-bold text-gray-900">{getCurrencySymbol(tripData?.currency)}{(totalCost / tripDuration).toFixed(2)}</div>
-                      <div className="text-gray-600">Per Day</div>
+                    <CardContent className="p-4 md:p-6 text-center">
+                      <TrendingUp className="h-6 w-6 md:h-8 md:w-8 text-orange-500 mx-auto mb-2 md:mb-3" />
+                      <div className="text-xl md:text-3xl font-bold text-gray-900">{getCurrencySymbol(tripData?.currency)}{(totalCost / tripDuration).toFixed(2)}</div>
+                      <div className="text-sm md:text-base text-gray-600">Per Day</div>
                     </CardContent>
                   </Card>
                 </div>

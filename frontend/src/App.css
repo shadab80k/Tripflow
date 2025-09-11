@@ -248,17 +248,38 @@ select:focus-visible {
 }
 
 /* Responsive design enhancements */
+@media (max-width: 1024px) {
+  /* Tablet and below: Switch to horizontal scroll for day columns */
+  .days-container {
+    display: flex !important;
+    overflow-x: auto;
+    gap: 1.5rem !important;
+    padding-bottom: 1rem;
+  }
+  
+  .day-column {
+    flex-shrink: 0;
+    width: 300px;
+  }
+}
+
 @media (max-width: 768px) {
   .kanban-container {
     padding: 1rem;
   }
   
+  .days-container {
+    gap: 1rem !important;
+    padding-bottom: 2rem;
+  }
+  
   .day-column {
-    min-width: 320px;
+    min-width: 280px;
+    width: 280px;
   }
   
   .activity-card {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
   
   .hero-title {
@@ -268,6 +289,31 @@ select:focus-visible {
   
   .hero-subtitle {
     font-size: 1.125rem;
+  }
+  
+  /* Improve form spacing on mobile */
+  .dialog-content {
+    max-height: 85vh;
+    margin: 1rem;
+    width: calc(100vw - 2rem);
+    max-width: calc(100vw - 2rem);
+  }
+  
+  /* Better button layout on mobile */
+  .dialog-buttons {
+    flex-direction: column-reverse !important;
+    gap: 0.75rem !important;
+  }
+  
+  /* Responsive tabs */
+  .tabs-list {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.25rem;
+  }
+  
+  /* Improve map height on mobile */
+  .trip-map {
+    height: 300px !important;
   }
 }
 
@@ -281,7 +327,75 @@ select:focus-visible {
   }
   
   .day-column {
-    min-width: 280px;
+    min-width: 260px;
+    width: 260px;
+  }
+  
+  .days-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Further compress content on small screens */
+  .activity-card {
+    padding: 0.75rem !important;
+  }
+  
+  .day-header {
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Make statistics cards more compact */
+  .stats-card {
+    padding: 0.75rem !important;
+  }
+  
+  /* Improve header spacing */
+  .trip-header {
+    padding: 0.75rem 1rem !important;
+  }
+  
+  .trip-header h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  .dialog-content {
+    margin: 0.5rem;
+    width: calc(100vw - 1rem);
+    max-width: calc(100vw - 1rem);
+    border-radius: 0.75rem;
+  }
+}
+
+/* Touch-friendly mobile improvements */
+@media (max-width: 480px) {
+  /* Increase touch targets */
+  .btn, button {
+    min-height: 44px !important;
+    padding: 0.625rem 1rem !important;
+  }
+  
+  .day-column {
+    min-width: 240px;
+    width: 240px;
+  }
+  
+  /* Stack form elements */
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Better spacing for very small screens */
+  .activity-card {
+    font-size: 0.875rem;
+  }
+  
+  .trip-header h1 {
+    font-size: 1.25rem !important;
+  }
+  
+  .trip-header p {
+    font-size: 0.75rem !important;
   }
 }
 
